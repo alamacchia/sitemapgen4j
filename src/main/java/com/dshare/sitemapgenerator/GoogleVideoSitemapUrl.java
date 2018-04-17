@@ -32,7 +32,8 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 	private final Boolean hasVideoContentLoc;
 	private final String  uploader;
 	private final String uploaderInfo;
-	
+	private final String galleryLoc ;
+	private final String galleryLocTitle;
 	/** Options to configure Google Video URLs */
 	public static class Options extends AbstractSitemapUrlOptions<GoogleVideoSitemapUrl, Options> {
 		private URL playerUrl;
@@ -54,6 +55,8 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 		private Boolean hasVideoContentLoc;
 		private String uploader;
 		private String uploaderInfo;
+		private String galleryLoc ;
+		private String galleryLocTitle;
 	
 		/** Specifies a landing page URL, together with a "player" (e.g. SWF)
 		 *  
@@ -118,11 +121,6 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 		
 		/** The title of the video. Limited to 100 characters. */
 		public Options title(String title) {
-			if (title != null) {
-				if (title.length() > 100) {
-					throw new RuntimeException("Video title is limited to 100 characters: " + title);
-				}
-			}
 			this.title = title;
 			return this;
 		}
@@ -252,6 +250,17 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 			return this;
 		}
 		
+		public Options galleryLoc(String galleryLoc) {
+			this.galleryLoc = galleryLoc;
+			return this;
+		}
+
+		public Options galleryLocTitle(String galleryLocTitle) {
+			this.galleryLocTitle = galleryLocTitle;
+			return this;
+			
+		}
+		
 	}
 
 	/** Specifies a landing page URL, together with a "player" (e.g. SWF)
@@ -303,6 +312,8 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 		hasVideoContentLoc=options.hasVideoContentLoc;
 		uploader=options.uploader;
 		uploaderInfo=options.uploaderInfo;
+		galleryLoc=options.galleryLoc;
+		galleryLocTitle=options.galleryLocTitle;
 		
 	}
 	
@@ -387,6 +398,14 @@ public class GoogleVideoSitemapUrl extends WebSitemapUrl {
 
 	public String getUploaderInfo() {
 		return uploaderInfo;
+	}
+
+	public String getGalleryLoc() {
+		return galleryLoc;
+	}
+
+	public String getGalleryLocTitle() {
+		return galleryLocTitle;
 	}
 
 

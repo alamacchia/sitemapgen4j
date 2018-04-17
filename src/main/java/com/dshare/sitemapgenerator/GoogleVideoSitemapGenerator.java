@@ -91,7 +91,7 @@ public class GoogleVideoSitemapGenerator extends SitemapGenerator<GoogleVideoSit
 				tagSb.append("    <video:video>\n");
 				if (url.getPlayerUrl() != null) {
 					renderTag(tagSb, "video", "content_loc", url.getContentUrl());
-					tagSb.append("      <video:player_loc allow_embed=\"");
+					tagSb.append("<video:player_loc allow_embed=\"");
 					tagSb.append(url.getAllowEmbed());
 					tagSb.append("\">");
 					tagSb.append(url.getPlayerUrl());
@@ -102,12 +102,14 @@ public class GoogleVideoSitemapGenerator extends SitemapGenerator<GoogleVideoSit
 				renderTag(tagSb, "video", "description", url.getDescription());
 				renderTag(tagSb, "video", "rating", url.getRating());
 				renderTag(tagSb, "video", "view_count", url.getViewCount());
-				if (url.getUploader()!=null) {
+				if (url.getUploaderInfo()!=null) {
 					tagSb.append("<video:uploader info=\"");
 					tagSb.append(url.getUploaderInfo());
 					tagSb.append("\">");
 					tagSb.append(url.getUploader());
 					tagSb.append("</video:uploader>\n");
+				}else if (url.getUploader()!=null)  {
+					renderTag(tagSb, "video", "uploader", url.getCategory());
 				}
 				if (url.getPublicationDate() != null) {
 					renderTag(tagSb, "video", "publication_date", dateFormat.format(url.getPublicationDate()));
@@ -116,6 +118,13 @@ public class GoogleVideoSitemapGenerator extends SitemapGenerator<GoogleVideoSit
 					for (String tag : url.getTags()) {
 						renderTag(tagSb, "video", "tag", tag);
 					}
+				}
+				if (url.getGalleryLoc()!=null && url.getGalleryLocTitle()!=null) {
+					tagSb.append("<video:gallery_loc title=\"");
+					tagSb.append(url.getGalleryLocTitle());
+					tagSb.append("\">");
+					tagSb.append(url.getGalleryLoc());
+					tagSb.append("</video:gallery_loc>\n");
 				}
 				renderTag(tagSb, "video", "category", url.getCategory());
 				renderTag(tagSb, "video", "family_friendly", url.getFamilyFriendly());
