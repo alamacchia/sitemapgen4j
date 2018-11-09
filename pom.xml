@@ -2,7 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 	<groupId>com.dshare.sitemap</groupId>
 	<artifactId>dshare-sitemapgen</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<url>https://github.com/alamacchia/sitemapgen4j</url>
 	<description>SitemapGen4j is an XML sitemap generator written in Java.</description>

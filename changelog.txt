@@ -1,0 +1,2 @@
+1.0.1
+ - Aggiunta modalità per gestire le url alternate divise per lingua (progetto ferrari restyling) 
