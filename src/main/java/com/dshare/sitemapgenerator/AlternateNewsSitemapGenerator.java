@@ -90,14 +90,14 @@ public class AlternateNewsSitemapGenerator extends SitemapGenerator<AlternateNew
 		}
 
 		public String getXmlNamespaces() {
-			return "xmlns:news=\"http://www.google.com/schemas/sitemap-news/0.9\"";
+			return "xmlns:news=\"http://www.google.com/schemas/sitemap-news/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\"";
 		}
 
 		public void render(AlternateNewsSitemapUrl url, StringBuilder sb, W3CDateFormat dateFormat) {
 			StringBuilder tagSb = new StringBuilder();
 			List<AlternateNewsSitemapUrl> alternates = url.getAlternates();
 			for (AlternateNewsSitemapUrl alternateNewsSitemapUrl : alternates) {
-				tagSb.append("    <xhtml:link rel=\"alternate\" href=\""+alternateNewsSitemapUrl.getUrl().toString()+"\" hreflang=\""+alternateNewsSitemapUrl.getLang()+"\" />");
+				tagSb.append("    <xhtml:link rel=\"alternate\" href=\""+alternateNewsSitemapUrl.getUrl().toString()+"\" hreflang=\""+alternateNewsSitemapUrl.getLang()+"\" />\n");
 			}
 			super.render(url, sb, dateFormat, tagSb.toString());
 			
