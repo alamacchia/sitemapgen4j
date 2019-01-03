@@ -40,7 +40,7 @@ public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitem
 		return builder;
 	}
 	
-	GoogleNewsSitemapGenerator(AbstractSitemapGeneratorOptions<?> options) {
+	GoogleNewsSitemapGenerator(AbstractSitemapGeneratorOptions<?> options) {		
 		super(options, new Renderer());
 		if (options.maxUrls > GoogleNewsSitemapGenerator.MAX_URLS_PER_SITEMAP) {
 			throw new RuntimeException("Google News sitemaps can have only 1000 URLs per sitemap: " + options.maxUrls);
@@ -100,7 +100,13 @@ public class GoogleNewsSitemapGenerator extends SitemapGenerator<GoogleNewsSitem
 		public void render(GoogleNewsSitemapUrl url, StringBuilder sb, W3CDateFormat dateFormat) {
 			StringBuilder tagSb = new StringBuilder();
 			tagSb.append("    <news:news>\n");
+			tagSb.append("      <news:publication>\n");
+			renderSubTag(tagSb, "news", "name", url.getPublication().getName());
+			renderSubTag(tagSb, "news", "language", url.getPublication().getLanguage());
+			tagSb.append("      </news:publication>\n");
+			renderTag(tagSb, "news", "genres", url.getGenres());
 			renderTag(tagSb, "news", "publication_date", dateFormat.format(url.getPublicationDate()));
+			renderTag(tagSb, "news", "title", url.getTitle());
 			renderTag(tagSb, "news", "keywords", url.getKeywords());
 			tagSb.append("    </news:news>\n");
 			super.render(url, sb, dateFormat, tagSb.toString());

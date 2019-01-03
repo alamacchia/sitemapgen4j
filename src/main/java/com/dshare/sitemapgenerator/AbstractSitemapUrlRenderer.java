@@ -42,5 +42,11 @@ abstract class AbstractSitemapUrlRenderer<T extends WebSitemapUrl> implements IS
 		sb.append(tagName);
 		sb.append(">\n");
 	}
+	
+	public void renderSubTag(StringBuilder sb, String namespace, String tagName, Object value) {
+		if (value == null) return;
+		sb.append("  ");
+		renderTag(sb, namespace, tagName, value);
+	}	
 
 }
